@@ -47,3 +47,59 @@ const quizQuestions = [
   },
   // Add more quiz questions here
 ];
+
+const startButton = document.getElementById("start-btn");
+const questionElement = document.getElementById("question");
+const choicesElement = document.getElementById("choices");
+const resultElement = document.getElementById("result");
+const timerElement = document.getElementById("time-remaining");
+const scoreForm = document.getElementById("score-form");
+const initialsInput = document.getElementById("initials");
+const scoreList = document.getElementById("score-list");
+let currentQuestionIndex = 0;
+let timeLeft = 60;
+let timerInterval;
+let score = 0;
+
+function startQuiz() {
+  startButton.disabled = true;
+  timerInterval = setInterval(updateTimer, 1000);
+  displayQuestion();
+  startButton.removeEventListener("click", startQuiz);
+}
+function displayQuestion() {
+  const currentQuestion = quizQuestions[currentQuestionIndex];
+  questionElement.textContent = currentQuestion.question;
+  choicesElement.innerHTML = "";
+
+  for (let i = 0; i < currentQuestion.choices.length; i++) {
+    const choice = currentQuestion.choices[i];
+    const li = document.createElement("li");
+    const button = document.createElement("button");
+    button.textContent = choice;
+    button.addEventListener("click", () => {
+      checkAnswer(i);
+    });
+    li.appendChild(button);
+    choicesElement.appendChild(li);
+  }
+}
+
+function checkAnswer(choiceIndex) {
+  const currentQuestion = quizQuestions[currentQuestionIndex];
+
+  if (choiceIndex === currentQuestion.correctAnswer) {
+    resultElement.textContent = "Correct!";
+    score += 10; // Add 10 points for correct answer
+  } else {
+    resultElement.textContent = "Incorrect!";
+    timeLeft -= 10; // Deduct 10 seconds from the timer for incorrect answer
+  }
+
+  currentQuestionIndex++;
+  if (currentQuestionIndex < quizQuestions.length) {
+    displayQuestion();
+  } else {
+    endQuiz();
+  }
+}
