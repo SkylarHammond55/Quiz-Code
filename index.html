@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JavaScript Quiz</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+  <h1>JavaScript Quiz</h1>
+  <div id="quiz-container">
+    <h2 id="question"></h2>
+    <ul id="choices"></ul>
+  </div>
+  <div id="result"></div>
+  <div id="timer">Time: <span id="time-remaining"></span></div>
+  <button id="start-btn">Start Quiz</button>
+  <form id="score-form">
+    <label for="initials">Enter Initials:</label>
+    <input type="text" id="initials" required>
+    <button type="submit">Save Score</button>
+  </form>
+  <div id="scoreboard">
+    <h2>High Scores</h2>
+    <ol id="score-list"></ol>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
