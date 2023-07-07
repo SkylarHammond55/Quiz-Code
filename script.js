@@ -103,3 +103,53 @@ function checkAnswer(choiceIndex) {
     endQuiz();
   }
 }
+
+function updateTimer() {
+  timeLeft--;
+  timerElement.textContent = timeLeft;
+
+  if (timeLeft <= 0) {
+    endQuiz();
+  }
+}
+
+function calculateScore() {
+  // Calculate the final score based on the time left and points earned
+  return timeLeft + score;
+}
+
+
+function endQuiz() {
+  clearInterval(timerInterval);
+  questionElement.textContent = "";
+  choicesElement.innerHTML = "";
+  timerElement.textContent = "";
+
+  const finalScore = document.createElement("p");
+  const totalScore = calculateScore(); // Use the calculateScore function to get the final score
+  finalScore.textContent = `Final Score: ${totalScore} (Time Left: ${timeLeft} seconds)`;
+  resultElement.textContent = "";
+  resultElement.appendChild(finalScore);
+
+  scoreForm.style.display = "block";
+  scoreList.style.display = "block";
+  startButton.disabled = false;
+  startButton.textContent = "Restart Quiz";
+
+  scoreForm.addEventListener("submit", saveScore);
+
+  startButton.addEventListener("click", restartQuiz);
+}
+
+
+function restartQuiz() {
+  currentQuestionIndex = 0;
+  score = 0;
+  timeLeft = 60; // Reset the timer to its initial value
+  resultElement.textContent = "";
+  initialsInput.value = "";
+  scoreForm.style.display = "none";
+  scoreList.innerHTML = "";
+  startButton.removeEventListener("click", restartQuiz);
+  startQuiz();
+}
