@@ -153,3 +153,48 @@ function restartQuiz() {
   startButton.removeEventListener("click", restartQuiz);
   startQuiz();
 }
+
+function saveScore(event) {
+  event.preventDefault();
+  const initials = initialsInput.value;
+  const score = calculateScore(); // Use the calculateScore function to get the final score
+
+  // Save score to local storage
+  const scores = JSON.parse(localStorage.getItem("scores")) || [];
+  scores.push({ initials, score });
+
+  // Sort scores in descending order based on score value
+  scores.sort((a, b) => b.score - a.score);
+
+  // Save only the highest scores (up to a certain limit, e.g., 10)
+  const highestScores = scores.slice(0, 10);
+
+  localStorage.setItem("scores", JSON.stringify(highestScores));
+
+  scoreForm.style.display = "none";
+
+  // Display saved scores
+  displayScores();
+}
+
+
+
+
+
+function displayScores() {
+  const scores = JSON.parse(localStorage.getItem("scores")) || [];
+  scoreList.innerHTML = "";
+
+  scores.forEach((score) => {
+    const scoreItem = document.createElement("li");
+    scoreItem.textContent = `${score.initials}: ${score.score}`;
+    scoreList.appendChild(scoreItem);
+  });
+}
+
+startButton.addEventListener("click", startQuiz);
+
+// Display saved scores on page load
+displayScores();
+
+startButton.addEventListener("click", startQuiz);
