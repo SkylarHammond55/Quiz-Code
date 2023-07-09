@@ -2,12 +2,12 @@
 
 ## Description
 
-a java script quiz using
+a java script quiz using local storage to store high scores.
 ## Image
 
-![image](https://github.com/SkylarHammond55/Quiz-Code/blob/main/Assets/images/screencapture-file-C-Users-Owner-bootcamp-Quiz-Code-index-html-2023-07-08-21_50_01.png)
+![image](https://github.com/SkylarHammond55/Quiz-Code/blob/main/Assets/images/quiz%20screenshot.png)
 
 ## Link
 
-https://skylarhammond55.github.io/Portfolio/
+https://skylarhammond55.github.io/Quiz-Code/
 
